@@ -1,0 +1,90 @@
+.title {
+    background-color: #1d3446;
+    color: #ffff;
+    text-align: center;
+    font-size: 32px;
+    padding: 30px;
+}
+
+.cover {
+    background-color: #c8def0;
+    color: #4a555c;
+    text-align: center;
+    font-size: 24px;
+    padding: 100px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    border: 1px solid #a9a9a9;
+    padding: 5px 8px;
+    display: block;
+    margin: 0 auto;
+    &:hover {
+        cursor: pointer;
+        background-color: #cecece;
+    }
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+.container-top {
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+select, input {
+    padding: 5px 8px;
+    margin-right: 5px;
+}
+
+.moneyInput {
+    width: 80px;
+}
+
+.submitBtn {
+    border: none;
+    padding: 5px 8px;
+    border: 1px solid #a9a9a9;
+    &:hover {
+        cursor: pointer;
+        background-color: #cecece;
+    }
+}
+
+.list-item {
+    width: 400px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+}
+.spend {
+    display: inline-block;
+    width: 20%;
+}
+.minus {
+    color: red;
+}
+.plus {
+    color: green;
+}
+.description {
+    display: inline-block;
+    width: 70%;
+}
+.delBtn {
+    width: 10%;
+    border: none;
+    padding: 5px;
+    border: 1px solid #a9a9a9;
+    &:hover {
+        cursor: pointer;
+        background-color: #cecece;
+    }
+}
+.sum {
+    text-align: center;
+    margin: 30px;
+}
