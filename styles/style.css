@@ -33,7 +33,7 @@ a {
 
 .container-top {
     max-width: 420px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 select, input {
@@ -53,6 +53,10 @@ select, input {
         cursor: pointer;
         background-color: #cecece;
     }
+}
+
+hr {
+    margin: 30px;
 }
 
 .list-item {
