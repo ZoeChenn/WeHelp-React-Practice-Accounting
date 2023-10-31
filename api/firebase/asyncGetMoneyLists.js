@@ -8,7 +8,6 @@ const asyncGetMoneyLists = async (
     const user = getAuth().currentUser;
     const userId = user.uid;
 
-    console.log(userId)
     const q = query( MoneyListsDocRef, where('userId', '==', userId), ...queryConstraints );
     const docSnap = await getDocs(q);
 

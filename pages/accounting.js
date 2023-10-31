@@ -8,13 +8,13 @@ import { UserAuth } from "../api/firebase/AuthContext"
 
 
 export default function AccountingPage() {
-    const [type, setType] = useState('income');
-    const [money, setMoney] = useState('');
-    const [description, setDescription] = useState('');
-    const [list, setList] = useState([]);
-    const {user, logOut} = UserAuth();
+    const [ type, setType ] = useState('income');
+    const [ money, setMoney ] = useState('');
+    const [ description, setDescription ] = useState('');
+    const [ list, setList ] = useState([]);
+    const { user, logOut } = UserAuth();
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
+    const [ loading, setLoading ] = useState(true);
 
     const handleSignOut = () => {
         try {
@@ -147,7 +147,7 @@ export default function AccountingPage() {
                 小記：{calculateTotal(list)}
             </div>
             <div className="btn-warp">
-                <p>{ user ? `${user.displayName}，今天的帳都記了嗎？` : '' }</p>
+                <p>{ user ? `哈囉，${user.displayName}，今天的帳都記了嗎？` : '' }</p>
             </div>
             <div className="btn-warp">
                 <button className="btn"><Link href="/">返回首頁</Link></button>
