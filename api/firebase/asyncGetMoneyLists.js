@@ -1,15 +1,19 @@
-import { getDocs, orderBy, query } from 'firebase/firestore';
+import { getDocs, orderBy, query, where } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 import { MoneyListsDocRef } from './firebase';
 
 const asyncGetMoneyLists = async (
     queryConstraints = [ orderBy('created', 'desc') ]
 ) => {
-    const q = query( MoneyListsDocRef, ...queryConstraints );
+    const user = getAuth().currentUser;
+    const userId = user.uid;
+
+    console.log(userId)
+    const q = query( MoneyListsDocRef, where('userId', '==', userId), ...queryConstraints );
     const docSnap = await getDocs(q);
 
     const res = docSnap.docs.map((doc) => ({
         ...doc.data(),
-        created: JSON.stringify(doc.data().created),
         id: doc.id,
     }));
     return res;

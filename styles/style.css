@@ -15,11 +15,15 @@
     margin-bottom: 10px;
 }
 
+.btn-warp {
+    text-align: center;
+}
+
 .btn {
     border: 1px solid #a9a9a9;
     padding: 5px 8px;
-    display: block;
-    margin: 0 auto;
+    display: inline-block;
+    margin-right: 5px;
     &:hover {
         cursor: pointer;
         background-color: #cecece;

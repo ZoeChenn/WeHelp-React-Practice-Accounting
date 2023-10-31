@@ -1,8 +1,12 @@
-import { doc, getDoc, addDoc, serverTimestamp } from 'firebase/firestore';
+import { addDoc, serverTimestamp } from 'firebase/firestore';
 import { MoneyListsDocRef } from './firebase';
+import { getAuth } from "firebase/auth";
 
 const asyncAddList = async ({ type, money, description }) => {
-    const docRef = await addDoc( MoneyListsDocRef, {
+    const user = getAuth().currentUser;
+    const userId = user.uid;
+    const docRef = await addDoc( MoneyListsDocRef , {
+        userId,
         type,
         money,
         description,

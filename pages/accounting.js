@@ -1,14 +1,29 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import asyncAddList from '../api/firebase/asyncAddList';
 import asyncGetMoneyLists from '../api/firebase/asyncGetMoneyLists';
+import asyncAddList from '../api/firebase/asyncAddList';
 import asyncDeleteList from '../api/firebase/asyncDeleteList';
+import { UserAuth } from "../api/firebase/AuthContext"
+
 
 export default function AccountingPage() {
     const [type, setType] = useState('income');
     const [money, setMoney] = useState('');
     const [description, setDescription] = useState('');
     const [list, setList] = useState([]);
+    const {user, logOut} = UserAuth();
+    const router = useRouter();
+    const [loading, setLoading] = useState(true);
+
+    const handleSignOut = () => {
+        try {
+            logOut();
+            router.push('/');
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleTypeChange = (e) => {
         setType(e.target.value);
@@ -29,6 +44,7 @@ export default function AccountingPage() {
         }
 
         const newItem = {
+            userId: user.uid,
             type,
             money,
             description,
@@ -60,16 +76,27 @@ export default function AccountingPage() {
     };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const newData = await asyncGetMoneyLists();
-                setList(newData);
-            } catch (error) {
-                console.error('取得 Firebase 資料時出現錯誤：', error);
-            }
-        };
-        fetchData();
-    }, []);
+        if (user === null) {
+            setLoading(false);
+            router.push('/');
+        } else {
+            const fetchData = async () => {
+                try {
+                    const newData = await asyncGetMoneyLists();
+                    setList(newData);
+                    setLoading(false);
+                } catch (error) {
+                    console.error('取得 Firebase 資料時出現錯誤：', error);
+                    setLoading(false);
+                }
+            };
+            fetchData();
+        }
+    }, [user]);
+
+    if (loading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <>
@@ -119,9 +146,13 @@ export default function AccountingPage() {
             <div id="sum" className="sum">
                 小記：{calculateTotal(list)}
             </div>
-            <button className="btn">
-                <Link href="/">返回首頁</Link>
-            </button>
+            <div className="btn-warp">
+                <p>{ user ? `${user.displayName}，今天的帳都記了嗎？` : '' }</p>
+            </div>
+            <div className="btn-warp">
+                <button className="btn"><Link href="/">返回首頁</Link></button>
+                <button className="btn" onClick={handleSignOut}>登出</button>
+            </div>
         </>
     );
 }
